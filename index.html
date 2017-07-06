@@ -1,0 +1,48 @@
+<html>
+<head>
+
+</head>
+<body>
+  <div class='wrapper'>
+    <p>JSON will be received in 1 second</p>
+    <ul id='post'></ul>
+</div>
+<script src="https://code.jquery.com/jquery-1.x-git.min.js"></script>
+<script>
+  var charJson = [];
+  var jsonTry = [];
+  // for(var i=1;i<=2138;i++){
+  //   ajax1(i);
+  // }
+function ajax1(i){
+  return $.ajax({
+          url:'https://anapioficeandfire.com/api/characters/'+i,
+          complete: function (response) {
+             if(response.responseJSON != undefined){
+                if(response.responseJSON.playedBy != undefined && response.responseJSON.playedBy.length > 0){
+                 //console.log(data);
+                charJson.push(response.responseJSON);
+                //console.log(response.responseJSON.playedBy);
+                JSON.stringify(jsonTry.push(response.responseJSON))
+                console.log(jsonTry);
+              }
+            }
+          },
+          error: function () {
+              console.log('Bummer: there was an error!');
+          },
+      });
+}
+
+$.getJSON("final.json", function(json) {
+    $.each(json, function(index) {
+        //console.log(obj);
+        //result.append('<li>' + k + ': ' + v + '</li>');
+        $("#post").append('<li>' + json[index].name + '</li>');
+    });
+});
+
+
+</script>
+</body>
+</html>
